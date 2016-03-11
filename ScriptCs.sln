@@ -48,6 +48,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCs.Engine.Common", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCs.Engine.Roslyn", "src\ScriptCs.Engine.Roslyn\ScriptCs.Engine.Roslyn.csproj", "{E79EC231-E27D-4057-91C9-2D001A3A8C3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCs.EmbeddedConsole", "src\ScriptCs.EmbeddedConsole\ScriptCs.EmbeddedConsole.csproj", "{2AA884FA-525C-404E-B514-56FC070FE480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +108,10 @@ Global
 		{E79EC231-E27D-4057-91C9-2D001A3A8C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E79EC231-E27D-4057-91C9-2D001A3A8C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E79EC231-E27D-4057-91C9-2D001A3A8C3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AA884FA-525C-404E-B514-56FC070FE480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AA884FA-525C-404E-B514-56FC070FE480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AA884FA-525C-404E-B514-56FC070FE480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AA884FA-525C-404E-B514-56FC070FE480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
