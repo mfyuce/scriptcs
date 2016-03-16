@@ -6,7 +6,7 @@ namespace ScriptCs.Embedded
     using System;
     using System.Collections.Generic;
     using System.IO;
-
+    using System.Reflection;
     /// <summary>
     /// 
     /// </summary>
@@ -37,7 +37,40 @@ namespace ScriptCs.Embedded
         }
 
         // run script from file
-        public ScriptResult Run(string scriptPath)
+        public ScriptResult RunText(string script)
+        {
+            // preserve current directory
+            var previousCurrentDirectory = Environment.CurrentDirectory;
+
+            try
+            {
+                // set directory to where script is
+                // required to find NuGet dependencies
+                Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+                // prepare NuGet dependencies, download them if required
+                var nuGetReferences = PreparePackages(
+                                                Environment.CurrentDirectory,
+                                                fileSystem, packageAssemblyResolver,
+                                                packageInstaller, logger.Info);
+
+                // get script packs: not fully tested yet        
+                var scriptPacks = scriptPackResolver.GetPacks();
+
+                // execute script from file
+                scriptExecutor.Initialize(nuGetReferences, scriptPacks);
+                var res = filePreprocessor.ProcessScript(script);
+               return  scriptExecutor.ExecuteScript(res.Code);
+            }
+            finally
+            {
+                // restore current directory
+                Environment.CurrentDirectory = previousCurrentDirectory;
+            }
+        }
+
+        // run script from file
+        public ScriptResult RunFile(string scriptPath)
         {
             // preserve current directory
             var previousCurrentDirectory = Environment.CurrentDirectory;
@@ -68,7 +101,6 @@ namespace ScriptCs.Embedded
                 Environment.CurrentDirectory = previousCurrentDirectory;
             }
         }
-
         // prepare NuGet dependencies, download them if required
         private static IEnumerable<string> PreparePackages(
                                 string scriptPath,
